@@ -6,7 +6,7 @@ export interface SidebarItem {
     key: string;
     label: string;
     type: SidebarType;
-    route: string;
+    route?: string;
     hasChild: boolean;
     icon?: React.ReactElement;
     child?: SidebarItem[];

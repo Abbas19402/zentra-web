@@ -22,12 +22,12 @@ export const SidebarMenu: SidebarItem[] = [
       key: 'liked-videos',
       label: 'Liked Videos',
       type: 'home',
-      route: '/liked',
+      route: '/liked-videos',
       hasChild: false,
       icon: <LikedVideosIcon className="w-5 h-5" />,
     },
     {
-      key: 'my-videos-home',
+      key: 'my-videos',
       label: 'My Videos',
       type: 'home',
       route: '/my-videos',
@@ -38,7 +38,6 @@ export const SidebarMenu: SidebarItem[] = [
       key: 'settings',
       label: 'Settings',
       type: 'settings',
-      route: '/settings',
       hasChild: true,
       icon: <SettingsIcon className="w-5 h-5" />,
       child: [
