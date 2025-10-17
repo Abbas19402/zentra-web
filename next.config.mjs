@@ -3,7 +3,7 @@ const nextConfig = {images: {
     remotePatterns: [
       {
         protocol: 'http',
-        hostname: '192.168.0.198',
+        hostname: 'localhost',
         port: '8080',
         pathname: '/thumbnails/**', // Allows any image inside the thumbnails folder
       },
