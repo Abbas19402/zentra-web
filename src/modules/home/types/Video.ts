@@ -11,4 +11,5 @@ export interface Video {
   createdAt: string;
   updatedAt: string;
   playlist: string;
+  thumbnailUrl: string;
 }

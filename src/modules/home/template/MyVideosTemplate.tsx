@@ -17,7 +17,7 @@ export default function MyVideosTemplate() {
   const [description, setDescription] = useState<string | null>(null);
 
   useEffect(() => {
-     fetch('http://192.168.0.198:8080/videos')
+     fetch(`http://192.168.0.55:8080/videos/user/${user?.id}`)
        .then(res => res.json())
        .then(data => setVideos(data))
        .catch(err => console.error('Failed to fetch videos', err));
@@ -34,7 +34,7 @@ export default function MyVideosTemplate() {
     form.append('userId', user?.id ?? '');
     console.log(form.get('title'));
 
-    const res = await fetch('http://192.168.0.198:8080/videos/upload', {
+    const res = await fetch('http://192.168.0.55:8080/videos/upload', {
       method: 'POST',
       body: form,
     });
