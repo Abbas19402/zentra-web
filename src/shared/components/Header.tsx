@@ -10,7 +10,7 @@ import {
 
 const Header = () => {
     return (
-        <header className="w-full flex justify-evenly items-center p-4 gap-4 h-16">
+        <header className="w-full flex justify-evenly items-center p-4 gap-4 h-16 bg-white">
             {/* /Icon */}
             <div className='flex-1'>
                 <span className="text-2xl font-thin text-sky-800">ZENTRA</span>

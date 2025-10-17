@@ -46,7 +46,7 @@ const SidebarItem: React.FC<Partial<Omit<SidebarItem,'type'>>> = ({ icon, label,
 
 const Sidebar = () => {
     return (
-        <div className='max-w-64 w-full h-[calc(100vh-64px)] px-5'>
+        <div className='max-w-64 w-full h-[calc(100vh-64px)] px-5 sticky top-0 left-0'>
             <div className="flex flex-col justify-between items-center space-y-4">
                 {SidebarMenu.map(item => <SidebarItem 
                     key={item.key}

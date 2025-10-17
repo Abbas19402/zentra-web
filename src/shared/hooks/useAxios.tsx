@@ -7,31 +7,27 @@ const useAxios = () => {
 
   const axiosInstance = useMemo(() => {
     const instance = axios.create({
-      baseURL: 'http://localhost:8080/',
-      timeout: 5000,
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      baseURL: 'http://localhost:8080/'
     });
 
     instance.interceptors.request.use(
-      async (config) => {
+      async (config: any) => {
         const token = await getToken();
         if (token) {
           config.headers['Authorization'] = `Bearer ${token}`;
         }
         return config;
       },
-      (error) => {
+      (error: any) => {
         return Promise.reject(error);
       }
     );
 
     instance.interceptors.response.use(
-      (response) => {
+      (response: any) => {
         return response;
       },
-      (error) => {
+      (error: any) => {
         if (error.response?.status === 401) {
           console.error('Unauthorized access - token may be invalid or expired.');
         }
@@ -44,6 +40,5 @@ const useAxios = () => {
 
   return axiosInstance;
 };
-
 
 export default useAxios;

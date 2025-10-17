@@ -25,10 +25,12 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${font.className}`}>
         <Providers>
-          <Header/>
+          <div className="sticky top-0 left-0 z-10"><Header/></div>
           <div className="flex justify-center items-start">
-            <Sidebar />
-            <div className="flex-1">
+            <div className="fixed top-0 left-0 mt-16 max-w-64 w-full z-10">
+              <Sidebar />
+            </div>
+            <div className="ml-64 w-[calc(100vw-256px)] overflow-x-hidden scroll-smooth">
               {children}
             </div>
           </div>
