@@ -32,7 +32,6 @@ const VideoPlayerTemplate: React.FC<{metadata: Video}> = ({ metadata }) => {
   }
 
   const play = () => {
-    console.log(metadata.url)
     const video = document.getElementById('player') as HTMLVideoElement;
     if (Hls.isSupported()) {
       const hls = new Hls();
@@ -49,9 +48,7 @@ const VideoPlayerTemplate: React.FC<{metadata: Video}> = ({ metadata }) => {
   },[metadata.url, user, isSignedIn])
   return (
     <div className="w-full h-full">
-      <div className='w-[55vw] h-[65vh] overflow-hidden aspect-video'>
-        <video id="player" className='rounded-2xl' controls></video>
-      </div>
+      <video id="player" className='rounded-2xl aspect-video w-[55vw]' controls></video>
       <div className="w-[55vw] h-10 rounded-full mt-3 flex justify-between items-center">
         {(metadata.userImageUrl && metadata.userName) && <div className="flex space-x-2 items-center">
           <div className="relative w-9 h-9 rounded-full overflow-hidden border shrink-0">

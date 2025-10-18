@@ -70,3 +70,29 @@ export const ChevronToggleIcon: React.FC<ChevronToggleIconProps> = ({ isOpen, cl
     <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
   </svg>
 );
+
+export const LoadingIcon: React.FC<IconType> = (props) => {
+  return <svg
+    {...props}
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 50 50"
+    width="100%"
+    height="100%"
+    role="img"
+    aria-label="Loading"
+  >
+    <title>Loading</title>
+  
+    <g><circle
+        cx="25"
+        cy="25"
+        r="20"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="4"
+        stroke-linecap="round"
+        stroke-dasharray="31.4 125.6"
+      />
+    </g>
+  </svg>
+}
