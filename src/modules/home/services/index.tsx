@@ -58,6 +58,17 @@ const HomeServices = () => {
         }
     }
 
+    async function dislikeVideo(videoOwnerId: string, videoId: string, loggedInUserId: string) {
+        try{
+            const response = await http.post('http://localhost:8080/likes/video/dislike/'+videoId+"/"+videoOwnerId,{userId: loggedInUserId})
+            if(response) {
+                return response.data
+            }
+        } catch(e) {
+            // Toasting here
+        }
+    }
+
     async function getLikeStatus(videoId: string, loggedInUserId: string) {
         try{
             const response = await http.get(`http://localhost:8080/likes/${videoId}/${loggedInUserId}`)
@@ -69,7 +80,7 @@ const HomeServices = () => {
         }
     }
     
-    return { getUserDetails, getAllVideos, uploadVideo, getMyVideos, likeVideo, getLikeStatus }
+    return { getUserDetails, getAllVideos, uploadVideo, getMyVideos, likeVideo, getLikeStatus, dislikeVideo }
 }
 
 export default HomeServices

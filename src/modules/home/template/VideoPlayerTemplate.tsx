@@ -9,6 +9,7 @@ import useRequest from '@/shared/hooks/useRequest'
 
 const VideoPlayerTemplate: React.FC<{metadata: Video}> = ({ metadata }) => {
   const [ isLiked, setIsLiked ] = useState<boolean>(false)
+  const [likeStatus , setLikeStatus] = useState<'LIKED' | 'DISLIKED' | null>(null)
 
   const { user, isSignedIn } = useUser()
   const request = useRequest()
@@ -22,11 +23,24 @@ const VideoPlayerTemplate: React.FC<{metadata: Video}> = ({ metadata }) => {
     }
   } 
 
+  const handleDislikeVideo = async() => {
+    if(isSignedIn && user) {
+      await request.home.dislikeVideo(metadata.userId, metadata._id, user.id)
+      getLikeStatus()
+    } else {
+      alert("You need to login first")
+    }
+  } 
+
   const getLikeStatus = async() => {
     if(isSignedIn && user) {
       const response = await request.home.getLikeStatus(metadata._id, user.id)
       if(response) {
-        setIsLiked(true)
+        setLikeStatus('LIKED')
+      } else if(response === false) {
+        setLikeStatus('DISLIKED')
+      } else if(response === null) {
+        setLikeStatus(null)
       }
     }
   }
@@ -58,7 +72,8 @@ const VideoPlayerTemplate: React.FC<{metadata: Video}> = ({ metadata }) => {
         </div>}
 
         <div className="flex items-center space-x-2">
-          <button onClick={handleLikeVideo} className='bg-slate-100 hover:bg-slate-200 w-12 h-9 rounded-xl'><span className='text-sm font-bold'>{!isLiked ? 'Like' : 'Liked'}</span></button>
+          <button onClick={handleLikeVideo} className='bg-slate-100 hover:bg-slate-200 w-12 h-9 rounded-xl'><span className='text-sm font-bold'>{(likeStatus === 'DISLIKED' || likeStatus === null) ? 'Like' : (likeStatus === 'LIKED' || likeStatus === null) ? 'Liked' : ''}</span></button>
+          <button onClick={handleDislikeVideo} className='bg-slate-100 hover:bg-slate-200 w-12 h-9 rounded-xl'><span className='text-sm font-bold'>{(likeStatus === 'LIKED' || likeStatus === null) ? 'Dislike' : (likeStatus === 'DISLIKED' || likeStatus === null) ? 'Disliked' : ''}</span></button>
         </div>
       </div>
 
