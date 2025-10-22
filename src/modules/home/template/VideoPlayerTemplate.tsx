@@ -8,7 +8,6 @@ import { useUser } from '@clerk/nextjs'
 import useRequest from '@/shared/hooks/useRequest'
 
 const VideoPlayerTemplate: React.FC<{metadata: Video}> = ({ metadata }) => {
-  const [ isLiked, setIsLiked ] = useState<boolean>(false)
   const [likeStatus , setLikeStatus] = useState<'LIKED' | 'DISLIKED' | null>(null)
 
   const { user, isSignedIn } = useUser()
@@ -39,7 +38,7 @@ const VideoPlayerTemplate: React.FC<{metadata: Video}> = ({ metadata }) => {
         setLikeStatus('LIKED')
       } else if(response === false) {
         setLikeStatus('DISLIKED')
-      } else if(response === null) {
+      } else if(!(response === true || response === false)) {
         setLikeStatus(null)
       }
     }

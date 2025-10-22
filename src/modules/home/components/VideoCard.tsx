@@ -10,10 +10,11 @@ const VideoCard = ({ video, user }: { video: Video, user?: any }) => {
     return (
         <div className="flex flex-col space-y-3 cursor-pointer group" onClick={()=>router.push('/video/'+video._id)}>
             <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-neutral-200">
-                <img 
+                <Image 
                     src={video.thumbnailUrl} 
                     alt={video.title} 
                     className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105" 
+                    fill
                 />
             </div>
             <div className="flex items-start space-x-3">

@@ -79,8 +79,19 @@ const HomeServices = () => {
             // Toasting here
         }
     }
+
+    async function getLikedVideos(loggedInUserId: string) {
+        try{
+            const response = await http.post(`http://localhost:8080/likes/videos/${loggedInUserId}`)
+            if(response) {
+                return response.data
+            }
+        } catch(e) {
+            // Toasting here
+        }
+    }
     
-    return { getUserDetails, getAllVideos, uploadVideo, getMyVideos, likeVideo, getLikeStatus, dislikeVideo }
+    return { getUserDetails, getAllVideos, uploadVideo, getMyVideos, likeVideo, getLikeStatus, dislikeVideo, getLikedVideos }
 }
 
 export default HomeServices
