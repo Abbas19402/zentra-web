@@ -10,7 +10,6 @@ import useRequest from '@/shared/hooks/useRequest'
 
 const VideoPlayerTemplate: React.FC<{metadata: Video}> = ({ metadata }) => {
   const [ isSaved, setIsSaved] = useState<boolean>(false)
-  const [ isLiked, setIsLiked ] = useState<boolean>(false)
   const [likeStatus , setLikeStatus] = useState<'LIKED' | 'DISLIKED' | null>(null)
 
   const { user, isSignedIn } = useUser()
@@ -55,7 +54,7 @@ const VideoPlayerTemplate: React.FC<{metadata: Video}> = ({ metadata }) => {
         setLikeStatus('LIKED')
       } else if(response === false) {
         setLikeStatus('DISLIKED')
-      } else if(response === null) {
+      } else if(!(response === true || response === false)) {
         setLikeStatus(null)
       }
     }
@@ -73,15 +72,10 @@ const VideoPlayerTemplate: React.FC<{metadata: Video}> = ({ metadata }) => {
   }
 
   const play = () => {
+    console.log(metadata.url)
     const video = document.getElementById('player') as HTMLVideoElement;
-    if (Hls.isSupported()) {
-      const hls = new Hls();
-      hls.loadSource(metadata.url);
-      hls.attachMedia(video);
-    } else {
       video.src = metadata.url;
-    }
-  };
+    };
 
   useEffect(() => {
     play()

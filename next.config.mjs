@@ -2,16 +2,11 @@
 const nextConfig = {images: {
     remotePatterns: [
       {
-        protocol: 'http',
-        hostname: 'localhost',
-        port: '8080',
-        pathname: '/thumbnails/**', // Allows any image inside the thumbnails folder
-      },
-      {
         protocol: 'https',
         hostname: 'img.clerk.com'
       }
     ],
+     domains: ['res.cloudinary.com'], // allow Cloudinary
   },
     async rewrites() {
         return [
