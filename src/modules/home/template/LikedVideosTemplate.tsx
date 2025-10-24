@@ -14,6 +14,7 @@ const LikedVideosTemplate = () => {
   async function fetchLikedVideos() {
     if(user) {
       const response = await request.home.getLikedVideos(user?.id)
+      console.log("Liked videos response:", response);
 
       let videosArray: Video[] = []
       for(let res of response) {
