@@ -14,6 +14,28 @@ const HomeServices = () => {
         }
     }
 
+ async function getComments(videoId: string) {
+        try{
+            const response = await http.get('http://localhost:8080/videos/comments/'+videoId)
+            if(response) {
+                return response.data
+            }
+        } catch(e) {
+            // Toasting here
+        }
+    }
+
+ async function addComment(videoId: string,userId: string, inComment: string) {
+        try{
+            const response = await http.post('http://localhost:8080/videos/add-comment/'+videoId+'/'+userId,  { text: inComment })
+            if(response) {
+                return response.data
+            }
+        } catch(e) {
+            // Toasting here
+        }
+    }
+
     async function getAllVideos() {
         try{
             const response = await http.get('http://localhost:8080/videos')
@@ -125,9 +147,34 @@ const HomeServices = () => {
             // Toasting here
         }
     }
+
+    async function subscribe(CreatorId: string, loggedInUserId: string, checking: boolean) {
+        try{
+            const response = await http.get(`http://localhost:8080/videos/subscribe/${CreatorId}/${loggedInUserId}/${checking}`)
+            if(response) {
+                return response.data
+            }
+        } catch(e) {
+            // Toasting here
+        }
+    }
+    ////////////////// now
+        async function getSubscribedVideos(loggedInUserId: string) {
+        try{
+            const response = await http.get(`http://localhost:8080/videos/subscribed-vids/${loggedInUserId}`)
+            if(response) {
+                return response.data
+            }
+        } catch(e) {
+            // Toasting here
+        }
+    }
     
-    return { getUserDetails, getAllVideos, uploadVideo, getMyVideos, likeVideo, getLikeStatus, dislikeVideo, getLikedVideos, getSaveStatus, saveVideo, savedVideos }
+
+
+    return { getUserDetails, getAllVideos, uploadVideo, getMyVideos, likeVideo, getLikeStatus, dislikeVideo, getLikedVideos, getSaveStatus, saveVideo, getComments, addComment, savedVideos, subscribe, getSubscribedVideos }
 }
+
 
 
 

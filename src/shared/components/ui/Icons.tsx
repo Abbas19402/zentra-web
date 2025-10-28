@@ -14,9 +14,11 @@ export const MyListIcon: React.FC<Partial<IconType>> = (props) => (
 );
 
 export const SubscriptionsIcon: React.FC<Partial<IconType>> = (props) => (
-  <svg {...props} fill="currentColor" viewBox="0 0 24 24">
-    <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z" />
-  </svg>
+  <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+  <rect x="3" y="4" width="18" height="14" rx="2" ry="2"/>
+  <path d="M8 22h8"/>
+  <path d="M12 10l4 2-4 2V10z"/>
+</svg>
 );
 
 export const LikedVideosIcon: React.FC<Partial<IconType>> = (props) => (
@@ -36,6 +38,18 @@ export const SettingsIcon: React.FC<Partial<IconType>> = (props) => (
     <path d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.99l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.5.44l-.38 2.65c-.61.26-1.17.59-1.69.99l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c-.12.22-.07.49.12.64l2.11 1.65c-.04.32-.07.64-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.99l.38 2.65c.04.26.25.44.5.44h4c.25 0 .46-.18.5-.44l.38-2.65c.61-.26 1.17-.59 1.69-.99l2.49 1c.22.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z" />
   </svg>
 );
+
+
+
+export const Hamburger:React.FC<Partial<IconType>> = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+  <g fill="none" stroke="white" strokeWidth="2" strokeLinecap="round">
+    <path d="M3 6h18"/>
+    <path d="M3 12h18"/>
+    <path d="M3 18h18"/>
+  </g>
+</svg>
+)
 
 export const AccountIcon: React.FC<Partial<IconType>> = (props) => (
   <svg {...props} fill="currentColor" viewBox="0 0 24 24">

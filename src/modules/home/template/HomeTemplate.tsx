@@ -35,7 +35,7 @@ const HomeTemplate = () => {
   useEffect(() => { fetchVideos() }, []);
 
   return (
-      <div className='grid grid-cols-4 gap-x-3 gap-y-6 mt-2 pr-3'>
+      <div className='grid grid-cols-1 gap-y-4 items-stretch lg:grid-cols-4 lg:gap-x-3 lg:gap-y-6 mt-2 pr-3 sm:grid-cols-2 sm:gap-x-2 sm:gap-y-4'>
         {(videos.filter(v => v.thumbnailUrl)).map((v) => <VideoCard key={v._id} video={v}/>)}
       </div>
   )

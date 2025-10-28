@@ -35,36 +35,12 @@ export const SidebarMenu: SidebarItem[] = [
       icon: <MyVideosIcon className="w-5 h-5" />,
     },
     {
-      key: 'settings',
-      label: 'Settings',
-      type: 'settings',
-      hasChild: true,
-      icon: <SettingsIcon className="w-5 h-5" />,
-      child: [
-        {
-          key: 'account',
-          label: 'Account',
-          type: 'settings',
-          route: '/settings/account',
-          hasChild: false,
-          icon: <AccountIcon className="w-5 h-5" />,
-        },
-        {
-          key: 'profile',
-          label: 'Profile',
-          type: 'settings',
-          route: '/settings/profile',
-          hasChild: false,
-          icon: <ProfileIcon className="w-5 h-5" />,
-        },
-        {
-          key: 'subscription',
-          label: 'Subscription',
-          type: 'settings',
-          route: '/settings/subscription',
-          hasChild: false,
-          icon: <ManageSubscriptionIcon className="w-5 h-5" />,
-        }
-      ],
+      key: 'subscriptions',
+      label: 'Subscriptions',
+      type: 'home',
+      route: '/subscriptions',
+      hasChild: false,
+      icon: <SubscriptionsIcon className="w-5 h-5" />,
+     
     },
   ];

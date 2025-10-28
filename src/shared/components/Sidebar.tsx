@@ -1,7 +1,7 @@
 'use client'
 
 import React, {useEffect, useState} from 'react'
-import { SidebarItem, SidebarType } from '../types'
+import type { SidebarItem, SidebarType } from '../types'
 import { SidebarMenu } from '../constants/SidebarMenu'
 import { ChevronToggleIcon } from './ui/Icons'
 import { useRouter } from 'next/navigation'
@@ -21,43 +21,71 @@ const SidebarItem: React.FC<Partial<Omit<SidebarItem,'type'>>> = ({ icon, label,
     }
     
     return (
-        <div className='w-full flex flex-col hover:cursor-pointer hover:text-black group' onClick={(e: any) => handleSidebarItemClick(e)}>
-            <div className="
-            flex justify-start items-center space-x-4 
-            w-[80%] h-10 py-2 px-5 
-            bg-slate-100
-            rounded-xl
-            ">
-                {icon}
-                <span className="whitespace-nowrap text-sm tracking-wide font-medium text-gray-600 select-none">{label}</span>
-                {hasChild && <div className="flex-1"><ChevronToggleIcon className='h-5 w-5 fill-gray-600 group-hover:fill-black float-right' isOpen={isChildSidebarOpen}/></div>}
-            </div>
-            {(hasChild && isChildSidebarOpen) && <div className={`ml-6 flex flex-col justify-end items-center space-y-2 w-full ${isChildSidebarOpen ? 'mt-4' : 'mt-0'}`}>
-                {isChildSidebarOpen && child?.map(item => <SidebarItem 
-                    key={item.key}
-                    icon={item.icon} 
-                    label={item.label}
-                    route={item.route}
-                />)}
-                </div>}
-        </div>
+       <div
+  onClick={(e: any) => handleSidebarItemClick(e)}
+  className="group w-full flex flex-col select-none"
+>
+  {/* Top-level item */}
+  <div
+    className="
+      flex items-center space-x-3
+      w-full h-11 px-4 py-2
+      rounded-xl transition-all duration-200
+      bg-gray-800/40 hover:bg-sky-500/20
+      text-gray-300 hover:text-sky-300
+      cursor-pointer
+    "
+  >
+    {icon}
+    <span className="whitespace-nowrap text-sm tracking-wide font-medium flex-1">
+      {label}
+    </span>
+
+    {hasChild && (
+      <ChevronToggleIcon
+        className="h-5 w-5 fill-gray-400 group-hover:fill-sky-300 transition-all"
+        isOpen={isChildSidebarOpen}
+      />
+    )}
+  </div>
+
+  {/* Children */}
+  {hasChild && isChildSidebarOpen && (
+    <div className="ml-6 mt-2 flex flex-col space-y-2">
+      {child?.map((item) => (
+        <SidebarItem
+          key={item.key}
+          icon={item.icon}
+          label={item.label}
+          route={item.route}
+        />
+      ))}
+    </div>
+  )}
+</div>
+
     )
 }
 
 const Sidebar = () => {
     return (
-        <div className='max-w-64 w-full h-[calc(100vh-64px)] px-5 sticky top-0 left-0'>
-            <div className="flex flex-col justify-between items-center space-y-4">
-                {SidebarMenu.map(item => <SidebarItem 
-                    key={item.key}
-                    icon={item.icon} 
-                    label={item.label}
-                    child={item.hasChild ? item.child : []}
-                    hasChild={item.hasChild}
-                    route={item.route}
-                />)}
-            </div>
-        </div>
+    <aside className="w-full h-[calc(100vh-64px)] px-4 py-6 
+                     bg-gradient-to-b from-gray-900/80 via-gray-950/90 to-black/90 
+                     backdrop-blur-md border-r border-gray-800 shadow-lg
+                     flex flex-col justify-between ">
+    <div className="flex flex-col space-y-2 w-full">
+      {SidebarMenu.map((item) => (
+        <SidebarItem
+          key={item.key}
+          icon={item.icon}
+          label={item.label}
+          child={item.hasChild ? item.child : []}
+          hasChild={item.hasChild}
+          route={item.route}
+        />
+      ))}
+    </div>
+  </aside>
     )
 }
 
