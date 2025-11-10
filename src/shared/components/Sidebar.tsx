@@ -4,9 +4,12 @@ import React, {useEffect, useState} from 'react'
 import type { SidebarItem, SidebarType } from '../types'
 import { SidebarMenu } from '../constants/SidebarMenu'
 import { ChevronToggleIcon } from './ui/Icons'
-import { useRouter } from 'next/navigation'
+import { useRouter, usePathname  } from 'next/navigation'
+
+
 
 const SidebarItem: React.FC<Partial<Omit<SidebarItem,'type'>>> = ({ icon, label, child, hasChild, route }) => {
+  const pathname = usePathname()
     const router = useRouter()
     const [isChildSidebarOpen, setIsChildSidebarOpen] = useState<boolean>(false)
 
@@ -19,7 +22,7 @@ const SidebarItem: React.FC<Partial<Omit<SidebarItem,'type'>>> = ({ icon, label,
         }
         if(route && !hasChild) router.push(route) 
     }
-    
+    const isActive = route === pathname
     return (
        <div
   onClick={(e: any) => handleSidebarItemClick(e)}
@@ -27,41 +30,18 @@ const SidebarItem: React.FC<Partial<Omit<SidebarItem,'type'>>> = ({ icon, label,
 >
   {/* Top-level item */}
   <div
-    className="
-      flex items-center space-x-3
+    className={` flex items-center space-x-3
       w-full h-11 px-4 py-2
       rounded-xl transition-all duration-200
-      bg-gray-800/40 hover:bg-sky-500/20
-      text-gray-300 hover:text-sky-300
-      cursor-pointer
-    "
-  >
+      text-black
+      hover:bg-gray-100
+      cursor-pointer ${isActive ? ' bg-gray-200' : 'bg-white'}`}>
     {icon}
     <span className="whitespace-nowrap text-sm tracking-wide font-medium flex-1">
       {label}
     </span>
 
-    {hasChild && (
-      <ChevronToggleIcon
-        className="h-5 w-5 fill-gray-400 group-hover:fill-sky-300 transition-all"
-        isOpen={isChildSidebarOpen}
-      />
-    )}
   </div>
-
-  {/* Children */}
-  {hasChild && isChildSidebarOpen && (
-    <div className="ml-6 mt-2 flex flex-col space-y-2">
-      {child?.map((item) => (
-        <SidebarItem
-          key={item.key}
-          icon={item.icon}
-          label={item.label}
-          route={item.route}
-        />
-      ))}
-    </div>
-  )}
 </div>
 
     )
@@ -70,8 +50,8 @@ const SidebarItem: React.FC<Partial<Omit<SidebarItem,'type'>>> = ({ icon, label,
 const Sidebar = () => {
     return (
     <aside className="w-full h-[calc(100vh-64px)] px-4 py-6 
-                     bg-gradient-to-b from-gray-900/80 via-gray-950/90 to-black/90 
-                     backdrop-blur-md border-r border-gray-800 shadow-lg
+                      bg-white
+                     backdrop-blur-md  shadow-lg
                      flex flex-col justify-between ">
     <div className="flex flex-col space-y-2 w-full">
       {SidebarMenu.map((item) => (

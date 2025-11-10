@@ -1,13 +1,13 @@
 import axios from 'axios';
 import { useAuth } from '@clerk/nextjs';
 import { useMemo } from 'react';
-
+const NEXT_PUBLIC_BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 const useAxios = () => {
   const { getToken } = useAuth();
 
   const axiosInstance = useMemo(() => {
     const instance = axios.create({
-      baseURL: 'http://localhost:8080/'
+      baseURL: NEXT_PUBLIC_BACKEND_URL
     });
 
     instance.interceptors.request.use(

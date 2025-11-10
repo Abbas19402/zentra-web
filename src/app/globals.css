@@ -1,9 +1,6 @@
 @import "tailwindcss";
 
-:root {
-  --background: #6feeff;
-  --foreground: #171717;
-}
+
 
 @theme inline {
   --color-background: var(--background);
@@ -32,35 +29,45 @@ body {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
-
-/* 🌌 FilePond Dark Mode - StreaMeyo Theme */
+/* 🌤️ FilePond Light Mode - StreaMeyo Theme */
 .filepond--root {
-  --fp-bg-color: rgba(17, 24, 39, 0.9); /* bg-gray-900/90 */
-  --fp-border-color: rgba(56, 189, 248, 0.2); /* sky-400 */
-  --fp-hover-border-color: rgba(56, 189, 248, 0.8);
-  --fp-text-color: #e5e7eb; /* text-gray-200 */
-  --fp-accent-color: #38bdf8; /* sky-400 */
-  --fp-shadow-color: rgba(56, 189, 248, 0.3);
+  --fp-bg-color: #f9fafb; /* bg-gray-50 */
+  --fp-border-color: rgba(203, 213, 225, 0.8); /* border-gray-300 */
+  --fp-hover-border-color: rgba(54, 54, 54, 0.8); /* sky-400 */
+  --fp-text-color: #374151; /* text-gray-700 */
+  --fp-accent-color: #0284c7; /* sky-600 */
+  --fp-shadow-color: rgba(56, 189, 248, 0.25);
 }
 
 /* Base container */
 .filepond--panel-root {
   background-color: var(--fp-bg-color) !important;
-  border: 1px dashed var(--fp-border-color) !important;
+  border: 2px dashed var(--fp-border-color) !important;
   border-radius: 1rem !important;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 /* Hover effect */
 .filepond--root:hover .filepond--panel-root {
   border-color: var(--fp-hover-border-color) !important;
-  box-shadow: 0 0 15px var(--fp-shadow-color);
+  box-shadow: 0 0 12px var(--fp-shadow-color);
 }
 
-/* Label text */
+/* Label action ("Browse") */
 .filepond--label-action {
   color: var(--fp-accent-color) !important;
   font-weight: 600;
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+.filepond--label-action:hover {
+  color: #0369a1 !important; /* sky-700 */
+}
+
+/* Drop label main text */
+.filepond--drop-label {
+  color: var(--fp-text-color) !important;
+  font-weight: 500;
 }
 
 /* File info text */
@@ -72,34 +79,33 @@ body {
 /* Progress bar */
 .filepond--item-panel {
   background-color: var(--fp-accent-color) !important;
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
-/* Drop label (main text) */
-.filepond--drop-label {
-  color: var(--fp-text-color) !important;
-  font-weight: 500;
-}
-
-/* Remove background highlight when selecting */
+/* Blob highlight */
 .filepond--drip-blob {
   background-color: var(--fp-accent-color) !important;
-  opacity: 0.3;
+  opacity: 0.25;
 }
 
-/* Make buttons (remove/upload) rounded and sleek */
+/* Remove / revert buttons */
 .filepond--action-remove-item,
 .filepond--action-revert-item-processing {
-  background: rgba(255, 255, 255, 0.1) !important;
+  background: rgba(2, 132, 199, 0.08) !important; /* light sky bg */
   color: var(--fp-accent-color) !important;
   border-radius: 9999px !important;
-  transition: background 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .filepond--action-remove-item:hover,
 .filepond--action-revert-item-processing:hover {
   background: var(--fp-accent-color) !important;
-  color: black !important;
+  color: white !important;
+}
+
+/* Optional: smooth transition when file added */
+.filepond--file {
+  transition: all 0.25s ease;
 }
 
 /* Hide scrollbars */

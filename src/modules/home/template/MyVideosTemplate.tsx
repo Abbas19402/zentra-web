@@ -8,7 +8,7 @@ import axios from 'axios';
 
 import MyVideosList from '../components/MyVideosList';
 import UploadVideoForm from '../components/UploadVideoForm';
-
+const NEXT_PUBLIC_BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 export default function MyVideosTemplate() {
   const [progress, setProgress] = useState(0);
   const [videos, setVideos] = useState<Video[]>([]);
@@ -36,7 +36,7 @@ export default function MyVideosTemplate() {
 
     setIsUploading(true);
     try {
-      const { signature, timestamp, apiKey, cloudName } = (await axios.get('http://localhost:8080/videos/upload-signature')).data;
+      const { signature, timestamp, apiKey, cloudName } = (await axios.get(`${NEXT_PUBLIC_BACKEND_URL}/videos/upload-signature`)).data;
 
       const formData = new FormData();
       formData.append("file", selectedFile);
@@ -59,15 +59,23 @@ export default function MyVideosTemplate() {
         }
       );
 
-      const { secure_url, public_id } = uploadRes.data;
+      const { secure_url, public_id, duration } = uploadRes.data;
+      console.log("samay",duration)
+       
+      
+     const mins = Math.floor(duration / 60);
+const secs = Math.floor(duration % 60);
+const formatDuration = `${mins}:${secs.toString().padStart(2, '0')}`;
 
-      await axios.post('http://localhost:8080/videos/cloud/upload', {
+
+      await axios.post(`${NEXT_PUBLIC_BACKEND_URL}/videos/cloud/upload`, {
         title: videoMetadata.title,
         description: videoMetadata.description,
         userId: user?.id ?? '',
         url: secure_url,
         publicId: public_id,
         thumbnailUrl: secure_url.replace(/\.\w+$/, '.jpg'),
+        duration: formatDuration
       });
 
       alert("Upload complete!");
@@ -85,7 +93,7 @@ export default function MyVideosTemplate() {
   }, [user]);
 
   return (
-    <main className="flex flex-col space-y-10 py-10 px-6 text-gray-100 bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 rounded-2xl shadow-[0_0_40px_rgba(0,0,0,0.6)]">
+    <main className="flex flex-col space-y-10 text-gray-800 ">
       {/* Upload Section */}
       <UploadVideoForm
         handleUpload={handleUpload}

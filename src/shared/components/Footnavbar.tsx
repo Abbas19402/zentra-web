@@ -29,8 +29,8 @@ const FootNavbarItem: React.FC<Partial<Omit<SidebarItem,'type'>>> = ({ icon, lab
   <div
     className="
       flex flex-col items-center 
-      bg-gray-800/40 hover:bg-sky-500/20
-      text-gray-300 hover:text-sky-300
+      bg-white hover:bg-white/10
+      text-black
       cursor-pointer py-2"
   >
     {icon}
@@ -46,9 +46,9 @@ const FootNavbarItem: React.FC<Partial<Omit<SidebarItem,'type'>>> = ({ icon, lab
 const Footnavbar = () => {
     return (
     <aside className="w-full 
-                     bg-gradient-to-b from-gray-900/80 via-gray-950/90 to-black/90 
+                     bg-white
                      backdrop-blur-md border-r border-gray-800 shadow-lg
-                     flex justify-between bg-blue-800">
+                     flex justify-between ">
     <div className="flex space-y-2 w-full">
       {SidebarMenu.map((item) => (
         <FootNavbarItem

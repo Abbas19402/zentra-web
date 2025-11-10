@@ -1,10 +1,10 @@
 import VideoPlayerTemplate from '@/modules/home/template/VideoPlayerTemplate'
 import { Video } from '@/shared/models/video'
 import React from 'react'
-
+const NEXT_PUBLIC_BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 const VideoPlayerPage = async({ params }: { params: { slug: string } }) => {
   try {
-    const response = await fetch(`http://localhost:8080/videos/${params.slug}`, {
+    const response = await fetch(`${NEXT_PUBLIC_BACKEND_URL}/videos/${params.slug}`, {
       cache: 'no-store',
     });
 

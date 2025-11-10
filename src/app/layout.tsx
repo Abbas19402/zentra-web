@@ -27,7 +27,7 @@ export default function RootLayout({
       <body className={`${font.className}`}>
         <Providers>
           <div className="sticky top-0 left-0 z-50"><Header /></div>
-          <div className="flex items-start min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-black relative overflow-hidden text-gray-100">
+          <div className="flex items-start min-h-screen bg-white relative overflow-hidden text-gray-100">
             
             <div className="relative z-10 flex">
               <div className="fixed top-0 left-0 mt-16 w-full z-10 hidden md:block md:max-w-52 lg:max-w-72">
@@ -38,7 +38,7 @@ export default function RootLayout({
               </div>
             </div>
           </div>
-           <div className="md:hidden sticky bottom-0 left-0 z-50 bg-yellow-600">
+           <div className="md:hidden sticky bottom-0 left-0 z-50">
               <Footnavbar/>
             </div>
         </Providers>

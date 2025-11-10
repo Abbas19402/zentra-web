@@ -12,5 +12,6 @@ export interface Video {
     playlist: string;
     thumbnailUrl: string;
     userName?: string;
-    userImageUrl?: string
+    userImageUrl?: string;
+    duration?: string;
 }

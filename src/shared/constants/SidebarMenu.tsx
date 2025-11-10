@@ -40,7 +40,7 @@ export const SidebarMenu: SidebarItem[] = [
       type: 'home',
       route: '/subscriptions',
       hasChild: false,
-      icon: <SubscriptionsIcon className="w-5 h-5" />,
+      icon: <SubscriptionsIcon className="w-5 h-5 text-black" />,
      
     },
   ];

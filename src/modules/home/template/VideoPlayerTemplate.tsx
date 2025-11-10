@@ -13,17 +13,19 @@ const VideoPlayerTemplate: React.FC<{metadata: Video}> = ({ metadata }) => {
   const [ isSaved, setIsSaved] = useState<boolean>(false)
   const [ isSubscibed, setSubscribed] = useState<boolean>( false )
   const [likeStatus , setLikeStatus] = useState<'LIKED' | 'DISLIKED' | null>(null)
-
+  const [likesCount, setLikesCount] = useState(metadata.likesCount)
   const { user, isSignedIn } = useUser()
   const request = useRequest()
 
   const handleLikeVideo = async() => {
     if(isSignedIn && user) {
-      await request.home.likeVideo(metadata.userId, metadata._id, user.id)
+      const response = await request.home.likeVideo(metadata.userId, metadata._id, user.id)
       getLikeStatus()
+      console.log(response)
+      setLikesCount(response);
     } else {
       alert("You need to login first")
-    }
+    } 
   } 
 
    const handleSaveVideo = async() => {
@@ -42,8 +44,10 @@ const VideoPlayerTemplate: React.FC<{metadata: Video}> = ({ metadata }) => {
 
   const handleDislikeVideo = async() => {
     if(isSignedIn && user) {
-      await request.home.dislikeVideo(metadata.userId, metadata._id, user.id)
+      const response = await request.home.dislikeVideo(metadata.userId, metadata._id, user.id)
       getLikeStatus()
+       console.log(response)
+      setLikesCount(response);
     } else {
       alert("You need to login first")
     }
@@ -116,18 +120,25 @@ const VideoPlayerTemplate: React.FC<{metadata: Video}> = ({ metadata }) => {
         ></video>
       </div>
 
+       <div>
+          {metadata.title && (
+          <div className="flex items-center space-x-3 text-gray-800 mt-4 px-4">
+            <h1 className="font-semibold">{metadata.title}</h1>
+          </div>
+        )}
+       </div>
       {/* User Info + Actions */}
-      <div className="mt-4 flex justify-between items-center w-full">
+      <div className="mt-4 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-y-4 w-full">
         {(metadata.userImageUrl && metadata.userName) && (
           <div className="flex items-center space-x-3">
-            <div className="relative w-10 h-10 rounded-full overflow-hidden border border-gray-700">
+            <div className="relative w-8 h-8 rounded-full overflow-hidden border border-gray-400">
               <Image src={metadata.userImageUrl} alt={metadata.title} fill className="object-cover" />
             </div>
-            <span className="font-semibold text-gray-100">{metadata.userName}</span>
+            <span className=" text-gray-800">{metadata.userName}</span>
             { !isSubscibed?
-            <span onClick={() => handleSubscribe(false)} className='text-xs text-gray-100 border border-white-400 px-1 py-1 rounded-md hover:bg-white hover:text-black'>Subscribe +</span>
+            <span onClick={() => handleSubscribe(false)} className='text-xs text-gray-800 border border-gray-800 px-1 py-1 rounded-md hover:bg-black hover:text-white'>Subscribe +</span>
             :
-     <span onClick={() => handleSubscribe(false)} className='text-xs text-gray-100 border border-white-400 px-1 py-1 rounded-md hover:bg-white hover:text-black'>Subscribed</span>
+     <span onClick={() => handleSubscribe(false)} className='text-xs bg-white text-gray-800 border border-black px-1 py-1 rounded-md hover:bg-gray-800 hover:text-white'>Subscribed</span>
        
 }
           </div>
@@ -136,23 +147,19 @@ const VideoPlayerTemplate: React.FC<{metadata: Video}> = ({ metadata }) => {
         <div className="flex items-center space-x-3">
           <button
             onClick={handleLikeVideo}
-            className="bg-gray-800 hover:bg-sky-900 transition-colors text-gray-100 hover:text-sky-400 w-14 h-9 rounded-xl flex items-center justify-center font-bold"
+            className={` bg-gray-100 shadow-md transition-colors text-gray-800 hover:text-white hover:bg-gray-800 px-2  rounded-md flex items-center justify-center`}
           >
             {(likeStatus === 'DISLIKED' || likeStatus === null) ? 'Like' : (likeStatus === 'LIKED' || likeStatus === null) ? 'Liked' : ''}
           </button>
           <button
             onClick={handleDislikeVideo}
-            className="bg-gray-800 hover:bg-red-900 transition-colors text-gray-100 hover:text-red-400 w-14 h-9 rounded-xl flex items-center justify-center font-bold"
+            className={`bg-gray-100 shadow-md  transition-colors text-gray-800 hover:text-white hover:bg-gray-800 px-2  rounded-md flex items-center justify-center`}
           >
             {(likeStatus === 'LIKED' || likeStatus === null) ? 'Dislike' : (likeStatus === 'DISLIKED' || likeStatus === null) ? 'Disliked' : ''}
           </button>
           <button
             onClick={handleSaveVideo}
-            className={`w-14 h-9 rounded-xl flex items-center justify-center font-bold transition-colors ${
-              isSaved
-                ? 'bg-sky-800 text-sky-200 hover:bg-sky-700'
-                : 'bg-gray-800 text-gray-100 hover:bg-sky-900 hover:text-sky-400'
-            }`}
+            className={`bg-gray-100 shadow-md  transition-colors text-gray-800 hover:text-white hover:bg-gray-800 px-2  rounded-md flex items-center justify-center`}
           >
             {isSaved ? 'Saved' : 'Save'}
           </button>
@@ -160,8 +167,11 @@ const VideoPlayerTemplate: React.FC<{metadata: Video}> = ({ metadata }) => {
       </div>
 
       {/* Description Box */}
-      <div className="mt-4 p-4 bg-gray-900 text-gray-100 rounded-xl min-h-[7rem] flex flex-col space-y-2 border border-gray-800 shadow-md">
-        <strong className="text-md text-sky-400">Description</strong>
+      <div className="mt-4 p-4 bg-gray-100 text-gray-700 rounded-xl min-h-[7rem] flex flex-col space-y-2  shadow-md">
+        <div className='flex justify-between items-center'>
+        <strong className="text-md text-gray-700">Description</strong>
+        <strong className="text-md text-gray-700">{likesCount} {likesCount === 1 ? 'like' : 'likes'}</strong>
+        </div>
         <p className="text-sm font-medium whitespace-pre-wrap">{metadata.description.trimStart()}</p>
       </div>
     </div>

@@ -14,10 +14,10 @@ const MyVideosList: React.FC<{
   return (
     <div className="mt-8">
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-semibold tracking-wider text-gray-100">My Videos</h2>
+        <h2 className="text-2xl font-semibold tracking-wider text-gray-800">My Videos</h2>
         <button
           onClick={() => setViewMode(viewMode === 'list' ? 'grid' : 'list')}
-          className="flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 hover:bg-gray-700 border border-gray-700 transition-all text-sky-400 font-medium"
+          className="flex items-center gap-2 px-4 py-2 rounded-full bg-gray-200 hover:bg-gray-300 border border-gray-200 transition-all text-gray-800 font-medium"
         >
           {viewMode === 'list' ? (
             <>
@@ -41,9 +41,10 @@ const MyVideosList: React.FC<{
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-10">
-          {videos.map((video) => (
-            <VideoCard key={video._id} video={video} user={user} />
-          ))}
+          {videos.map((video) => {
+             console.log("[VideoCard] rendering for:", user, video);
+           return <VideoCard key={video._id} video={video} user={user} />
+          })}
         </div>
       )}
     </div>

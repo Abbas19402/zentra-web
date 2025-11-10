@@ -5,6 +5,11 @@ const nextConfig = {images: {
         protocol: 'https',
         hostname: 'img.clerk.com'
       }
+      ,
+      {
+        protocol: 'https',
+        hostname: 'www.shutterstock.com',
+      }
     ],
      domains: ['res.cloudinary.com'], // allow Cloudinary
   },

@@ -23,39 +23,39 @@ const UploadVideoForm: React.FC<{
   return (
     <section
       className="w-full xl:w-[75%] mx-auto flex flex-col md:flex-row justify-between 
-                 items-start gap-10 md:gap-16 mb-16 p-8
-                 bg-gradient-to-br from-gray-900 via-gray-950 to-black
-                 rounded-3xl border border-gray-800 shadow-lg shadow-black/40"
+                 items-start gap-10 md:gap-16 mb-4 p-8
+                 
+                 rounded-3xl  shadow-lg shadow-black/40"
     >
       {/* Upload Section */}
       <div className="flex flex-col space-y-5 w-full md:w-[48%]">
-        <h2 className="text-lg font-semibold tracking-wide text-sky-400">
+        <h2 className="text-lg font-semibold tracking-wide text-gray-800">
           Upload Your Video 🎬
         </h2>
 
         {!selectedFile ? (
-          <div className="filepond-dark-theme">
-            <FilePond
-              required
-              allowMultiple={false}
-              onupdatefiles={(files) => {
-                setSelectedFile(files[0]?.file as File || null);
-              }}
-              labelIdle='📂 Drag & Drop your video or <span class="filepond--label-action text-sky-400">Browse</span>'
-            />
-          </div>
-        ) : (
-          <div className="p-6 border border-sky-700/30 rounded-2xl bg-gray-900/60 text-center text-gray-200 shadow-inner shadow-black/40">
-            <p className="font-semibold text-sky-400">Ready to upload:</p>
-            <p className="text-sm text-gray-400 truncate mt-1">{selectedFile.name}</p>
-            <button
-              onClick={() => setSelectedFile(null)}
-              className="mt-3 text-sm text-red-400 hover:text-red-300 underline transition-colors"
-            >
-              Cancel
-            </button>
-          </div>
-        )}
+    <div className="p-6 border-2 border-dashed border-gray-300 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors duration-200">
+      <FilePond
+        required
+        allowMultiple={false}
+        onupdatefiles={(files) => {
+          setSelectedFile(files[0]?.file as File || null);
+        }}
+        labelIdle='📂 <span class="font-medium text-gray-700">Drag & Drop your video</span> or <span class="filepond--label-action text-sky-600 hover:text-sky-700">Browse</span>'
+      />
+    </div>
+  ) : (
+    <div className="p-6 border border-gray-200 rounded-xl bg-gray-50 text-center text-gray-700 shadow-sm transition-all">
+      <p className="font-semibold text-gray-600">Ready to upload:</p>
+      <p className="text-sm text-gray-500 truncate mt-1">{selectedFile.name}</p>
+      <button
+        onClick={() => setSelectedFile(null)}
+        className="mt-3 text-sm text-red-500 hover:text-red-600 font-medium transition-colors"
+      >
+        Cancel
+      </button>
+    </div>
+  )}
       </div>
 
       {/* Metadata Section */}
@@ -64,7 +64,7 @@ const UploadVideoForm: React.FC<{
         <div>
           <label
             htmlFor="title"
-            className="block text-sm font-medium text-gray-300 mb-2 ml-2 tracking-wide"
+            className="block text-sm font-medium text-gray-800 mb-2 ml-2 tracking-wide"
           >
             Video Title
           </label>
@@ -77,10 +77,10 @@ const UploadVideoForm: React.FC<{
             onChange={(event) =>
               setVideoMetadata((prev) => ({ ...prev, title: event.target.value }))
             }
-            className="block w-full bg-gray-900/70 border border-gray-700 
-                       rounded-full px-5 py-3 text-gray-100 text-sm 
-                       focus:ring-2 focus:ring-sky-500 focus:border-sky-500 outline-none
-                       placeholder-gray-500 transition-all"
+            className="block w-full  border border-gray-700 
+                       rounded-full px-5 py-3  text-sm 
+                       focus:ring-2 focus:ring-gray-700 focus:border-gray-700 outline-none
+                       placeholder-gray-700 transition-all"
           />
         </div>
 
@@ -88,7 +88,7 @@ const UploadVideoForm: React.FC<{
         <div>
           <label
             htmlFor="description"
-            className="block text-sm font-medium text-gray-300 mb-2 ml-2 tracking-wide"
+            className="block text-sm font-medium text-gray-800 mb-2 ml-2 tracking-wide"
           >
             Description
           </label>
@@ -101,9 +101,9 @@ const UploadVideoForm: React.FC<{
             onChange={(event) =>
               setVideoMetadata((prev) => ({ ...prev, description: event.target.value }))
             }
-            className="block w-full bg-gray-900/70 border border-gray-700 
-                       rounded-2xl px-5 py-4 text-gray-100 text-sm resize-none
-                       focus:ring-2 focus:ring-sky-500 focus:border-sky-500 outline-none
+            className="block w-full  border border-gray-700 
+                       rounded-2xl px-5 py-4 text-gray-800 text-sm resize-none
+                       focus:ring-2 focus:ring-gray-700 focus:border-gray-700 outline-none
                        placeholder-gray-500 transition-all"
           ></textarea>
         </div>
@@ -116,10 +116,10 @@ const UploadVideoForm: React.FC<{
             disabled={!selectedFile || !videoMetadata.title || isUploading}
             className="relative w-full justify-center flex items-center px-4 py-3 
                        font-semibold text-white rounded-full
-                       bg-gradient-to-r from-sky-600 to-sky-500 
-                       hover:from-sky-500 hover:to-sky-400
+                       bg-gray-700
+                        hover:bg-gray-600
                        disabled:opacity-50 disabled:cursor-not-allowed
-                       shadow-md shadow-sky-500/30 hover:shadow-sky-400/40
+                       shadow-md shadow-gray-500/30 hover:shadow-gray-400/40
                        transition-all"
           >
             {isUploading && (
